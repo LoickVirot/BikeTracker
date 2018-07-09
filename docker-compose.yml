@@ -1,0 +1,9 @@
+version: '2'
+services:
+  node:
+    build: docker/node
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./app:/home/node/app
+
