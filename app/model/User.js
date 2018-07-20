@@ -27,6 +27,6 @@ userSchema.path('email').validate((email) => {
 userSchema.pre('save', async function () {
     const saltRounds = 10;
 
-    this.password = await bcrypt.hash(this.password, saltRounds)
+    this.password = await bcrypt.hash(this.password, saltRounds);
 })
 module.exports = mongoose.model('User', userSchema);

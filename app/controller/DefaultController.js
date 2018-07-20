@@ -1,21 +1,14 @@
-var User = require('../model/User')
+var User = require('../model/User');
+var BadRequestResponse = require('../core/responses/BadRequestResponse');
 
 module.exports = {
-    respond: (req, res, next) => {
+    respond: async (req, res, next) => {
         let name = "world";
         if (req.params.name !== undefined) {
             name = req.params.name;
         }
-
-        var user = new User({
-            username: name,
-            password: "test",
-            email: 'test@test.fr'
-        });
-        user.save()
-
+        
         res.send('hello ' + name);
-
-        next();
+        return next();
     }
 }
