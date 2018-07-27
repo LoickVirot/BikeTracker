@@ -24,9 +24,11 @@ userSchema.path('email').validate((email) => {
     return emailRegex.test(email);
 });
 
-userSchema.pre('save', async function () {
+userSchema.pre('save', async function (next) {
     const saltRounds = 10;
 
+    if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, saltRounds);
-})
+});
+
 module.exports = mongoose.model('User', userSchema);

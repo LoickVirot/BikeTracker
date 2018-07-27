@@ -12,7 +12,7 @@ module.exports = {
             res.send(new BadRequestResponse("Cannot insert user into database: " + err));
             return next();
         }
-        res.send(new SuccessResponse());
+        res.send(new SuccessResponse('OK'));
         return next();
     },
 
@@ -51,5 +51,29 @@ module.exports = {
             res.send(new InternalErrorResponse("Cannot delete user: " + err));
         }
         return next();
-    } 
+    },
+
+    put: async (req, res, next) => {
+        try {
+            let user = await User.findOne({_id: req.params.id});
+            if (user === null) {
+                res.send(new BadRequestResponse("User not found"));
+                return next();
+            }
+            if (req.body.password !== undefined) {
+                user.password = req.body.password;
+            }
+            if (req.body.username !== undefined) {
+                user.username = req.body.username;
+            }
+            if (req.body.email !== undefined) {
+                user.email = req.body.email;
+            }
+            await user.save();
+            res.send(new SuccessResponse("OK"));
+        } catch (err) {
+            res.send(new InternalErrorResponse("Cannot update user: " + err))
+        }
+        return next();
+    }
 }

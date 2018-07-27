@@ -10,5 +10,6 @@ module.exports = {
         server.get('/user', UserController.get);
         server.get('/user/:id', UserController.get);
         server.del('/user/:id', UserController.delete);
+        server.put('/user/:id', UserController.put);
     }
 }
