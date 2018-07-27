@@ -1,6 +1,7 @@
 var User = require('../model/User');
 var BadRequestResponse = require('../core/responses/BadRequestResponse');
 var SuccessResponse = require('../core/responses/SuccessResponse');
+var InternalErrorResponse = require('../core/responses/InternalErrorResponse');
 
 module.exports = {
     post: async (req, res, next) => {
@@ -15,11 +16,40 @@ module.exports = {
         return next();
     },
 
-    get: async(req, res, next) => {
+    get: async (req, res, next) => {
         if (req.params.id === undefined) {
-            res.send(new SuccessResponse(await User.find()))
+            try {
+                let users = await User.find();
+                res.send(new SuccessResponse(users));
+            } catch (err) {
+                res.send(new InternalErrorResponse(err));
+            }
             return next();
         }
-        res.send(new SuccessResponse(await User.find({_id: req.params.id})))
-    }
+        try {
+            let user = await User.findOne({_id: req.params.id});
+            if (user == null) {
+                res.send(new BadRequestResponse('User not found'))
+                return next();
+            }
+            res.send(new SuccessResponse(user));
+        } catch (err) {
+            res.send(new InternalErrorResponse(err));
+        }
+        return next();
+    },
+
+    delete: async (req, res, next) => {
+        try {
+            let user = await User.findOneAndRemove({_id: req.params.id})
+            if (user === null) {
+                res.send(new BadRequestResponse("User not found"));
+                return next();
+            }
+            res.send(new SuccessResponse("OK"));
+        } catch (err) {
+            res.send(new InternalErrorResponse("Cannot delete user: " + err));
+        }
+        return next();
+    } 
 }

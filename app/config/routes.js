@@ -9,5 +9,6 @@ module.exports = {
         server.post('/user', UserController.post);
         server.get('/user', UserController.get);
         server.get('/user/:id', UserController.get);
+        server.del('/user/:id', UserController.delete);
     }
 }

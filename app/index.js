@@ -7,6 +7,8 @@ var server = restify.createServer({
     name: appConfig.appName
 });
 
+server.pre(restify.pre.sanitizePath());
+
 server.use(restify.plugins.bodyParser());
 
 // Initialize Database
