@@ -10,14 +10,15 @@ var server = restify.createServer({
 server.use(restify.plugins.bodyParser());
 
 // Initialize Database
-mongoose.connect('mongodb://localhost:27017/tracker', { useNewUrlParser: true });
+mongoose.connect('mongodb://mongo:27017/tracker', { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 db.once('open', () => {
     console.log('Database connected');
 
-    // Initialize routes
+    // Initialize routes4
+
     var Router = require('./config/routes.js');
     Router.init(server);
 

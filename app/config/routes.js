@@ -7,5 +7,7 @@ module.exports = {
         server.get('/hello/:name', DefaultController.respond);
         
         server.post('/user', UserController.post);
+        server.get('/user', UserController.get);
+        server.get('/user/:id', UserController.get);
     }
 }
