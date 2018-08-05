@@ -17,7 +17,10 @@ export default {
     }
   },
   mounted () {
-    let position = [43.604652, 1.444209];
+    let position = [43.604652, 1.444209]; 
+    if (this.bikes[0] !== undefined) {
+      position = this.bikes[0].position
+    }
     let markers = [];
     var mymap = L.map('map').setView(position, 12);
     
