@@ -40,6 +40,7 @@ export default {
     left: 250px;
     right: 0;
     height: 100vh;
+    z-index: 1
   }
   #map {
     width: 100%;

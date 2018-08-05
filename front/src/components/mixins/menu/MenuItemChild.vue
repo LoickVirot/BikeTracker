@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item-child">
+  <div class="menu-item-child" :class="{selected: selected}">
     {{ title }}
   </div>
 </template>
@@ -9,7 +9,8 @@
 export default {
   name: 'menuItemChild',
   props: [
-    'title'
+    'title',
+    'selected'
   ]
 };
 
@@ -21,6 +22,9 @@ export default {
   padding-left: 35px;
   text-transform: initial;
   font-weight: 400;
+}
+.menu-item-child.selected {
+  background: red;
 }
 
 .menu-item-child:hover {

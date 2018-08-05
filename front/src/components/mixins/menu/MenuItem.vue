@@ -1,9 +1,9 @@
 <template>
-  <div class="menu-item" v-on:click="() => this.showChilds = !this.showChilds">
-    <div class="name">
+  <div class="menu-item">
+    <div class="name" v-on:click="() => this.showChilds = !this.showChilds">
       <font-awesome-icon :icon="icon" v-if="icon !== null" /><span>{{ title }}</span>
     </div>
-    <div class="childs" v-if="showChilds" v-for="child in childs" :key="child.name">
+    <div class="childs" v-if="showChilds" v-for="child in childs" :key="child.id">
       <menu-item-child :title="child.name"></menu-item-child>
     </div>
   </div>

@@ -6,7 +6,7 @@
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
-import MainMenu from './../mixins/MainMenu.vue';
+import MainMenu from './../mixins/menu/MainMenu.vue';
 import MainMap from './../map/MainMap.vue';
 
 export default {
