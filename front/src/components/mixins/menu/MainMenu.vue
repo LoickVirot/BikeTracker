@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     ...mapState({
-      bikes: state => state.menu.bikes
+      bikes: state => state.bike.bikes
     }),
 
     ...mapGetters([
