@@ -8,20 +8,17 @@
       <menu-item title="Mes motos" icon="motorcycle" :childs="bikes"></menu-item>
       <menu-item title="Paramètres" icon="cog" :childs="parameters"></menu-item>
     </div>
-    <main-menu-child v-if="selectedBike !== null" :bike="selectedBike"></main-menu-child>
   </div>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
 import { mapState, mapGetters } from 'vuex';
 import MenuItem from './MenuItem.vue';
-import MainMenuChild from './MainMenuChild.vue';
 
 export default {
   name: 'mainMenu',
   components: {
-    MenuItem,
-    MainMenuChild
+    MenuItem
   },
   data() {
     return {

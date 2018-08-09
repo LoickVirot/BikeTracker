@@ -1,19 +1,17 @@
 <template>
   <div class="mainStructure">
     <main-menu></main-menu>
-    <main-map></main-map>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
 import MainMenu from './../mixins/menu/MainMenu.vue';
-import MainMap from './../map/MainMap.vue';
 
 export default {
   name: 'mainStructure',
   components: {
     MainMenu,
-    MainMap,
   },
 };
 

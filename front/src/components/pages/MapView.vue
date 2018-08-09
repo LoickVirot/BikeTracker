@@ -1,5 +1,6 @@
 <template>
   <div id="map-container">
+    <main-menu-child v-if="selectedBike !== null" :bike="selectedBike"></main-menu-child>
     <div id="map">
       
     </div>
@@ -7,14 +8,22 @@
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
-import {mapActions} from 'vuex'
+import {mapActions} from 'vuex';
+import { mapState, mapGetters } from 'vuex';
+import MainMenuChild from './map/MainMenuChild.vue';
 
 export default {
-  name: 'mainMap',
-  data() {
-    return {
-      bikes: this.$store.state.bike.bikes
-    }
+  name: 'mapView',
+  components: {
+    MainMenuChild
+  },
+  computed: {
+    ...mapState({
+      bikes: state => state.bike.bikes
+    }),
+    ...mapGetters([
+      'selectedBike'
+    ]),
   },
   mounted () {
     let position = [43.604652, 1.444209]; 
@@ -73,5 +82,6 @@ export default {
   #map {
     width: 100%;
     height: 100vh;
+    z-index: 1;
   }
 </style>

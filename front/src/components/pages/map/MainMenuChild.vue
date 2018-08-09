@@ -55,11 +55,11 @@ export default {
   position: absolute;
   background: #FFF;
   padding: 20px;
-  left: 250px;
+  left: 0;
   top: 0;
   bottom: 0;
   width: 250px;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .main-menu-child .menu-close {
