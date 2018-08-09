@@ -1,7 +1,9 @@
 <template>
   <div class="mainStructure">
     <main-menu></main-menu>
-    <router-view></router-view>
+    <div class="main-structure">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
@@ -17,5 +19,9 @@ export default {
 
 </script>
 <style>
-
+.main-structure {
+  position: absolute;
+  left: 250px;
+  right: 0;
+}
 </style>

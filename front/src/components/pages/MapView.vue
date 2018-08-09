@@ -46,7 +46,6 @@ export default {
         bike.position.lat,
         bike.position.lng,
       ];
-      console.log(position);
       let marker = L.marker(position).addTo(mymap);
       marker.on('click', function() {
         self.selectBike(bike)
@@ -74,7 +73,7 @@ export default {
 <style>
   #map-container {
     position: absolute;
-    left: 250px;
+    left: 0;
     right: 0;
     height: 100vh;
     z-index: 1
