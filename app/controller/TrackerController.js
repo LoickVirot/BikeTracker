@@ -41,7 +41,22 @@ module.exports = {
     },
 
     put: async (req, res, next) => {
-        return next(new InternalErrorResponse('Not implemented'))   
+        let id = req.params.id;
+        let body = req.body;
+        try {
+            let tracker = await Tracker.findOne({_id: id});
+            if (body.label !== tracker.label) {
+                tracker.label = body.label; 
+            }
+            if (body.owner !== tracker.owner) {
+                tracker.owner = body.owner;
+            }
+            await tracker.save();
+            res.send(new SuccessResponse(tracker));
+            return next();
+        } catch (err) {
+            return next(new BadRequestResponse('Error while saving tracker: ' + err));
+        }
     },
 
     delete: async (req, res, next) => {

@@ -8,9 +8,14 @@ var trackerSchema = mongoose.Schema({
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
+    },
+    label: {
+        type: String,
+        required: true
     }
-})
+});
 
 // Validation
 

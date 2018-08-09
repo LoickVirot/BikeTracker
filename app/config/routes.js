@@ -12,7 +12,7 @@ module.exports = {
         server.get('/hello/:name', DefaultController.respond);
         
         // User CRUD
-        server.post('/user', AuthMiddleware, UserController.post);
+        server.post('/user', UserController.post);
         server.get('/user', AuthMiddleware, UserController.get);
         server.get('/user/:id', AuthMiddleware, UserController.get);
         server.del('/user/:id', AuthMiddleware, UserController.delete);
