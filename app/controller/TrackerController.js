@@ -5,8 +5,25 @@ let SuccessResponse = require('../core/responses/SuccessResponse');
 
 module.exports = {
 
+    list: async (req, res, next) => {
+        try {
+            let trackers = await Tracker.find({});
+            res.send(new SuccessResponse(trackers));
+            return next();
+        } catch (err) {
+            return next(new InternalErrorResponse('Error while getting trackers'));
+        }
+    },
+
     get: async (req, res, next) => {
-        return next(new InternalErrorResponse('Not implemented'))
+        trackerId = req.params.id;
+        try {
+            let tracker = await Tracker.findOne({_id: trackerId});
+            res.send(new SuccessResponse(tracker));
+            return next();
+        } catch (err) {
+            return next(new InternalErrorResponse('Error while getting trackers'));
+        }
     },
 
     post: async (req, res, next) => {
@@ -14,7 +31,7 @@ module.exports = {
             return next(new BadRequestResponse('TrackerId not defined'))
         }
         try {
-            let tracker = new Tracker({trackerId: req.body.trackerId});
+            let tracker = new Tracker(req.body);
             await tracker.save();
             res.send(new SuccessResponse(tracker))
             return next();

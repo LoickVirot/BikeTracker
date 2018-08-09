@@ -9,13 +9,13 @@ services:
     volumes:
       - ./app:/home/node/app
     ports:
-      - 8000:8080
+      - 1337:8080
     command: nodemon -L index.js
   vue:
     build: front
     volumes:
-      - /front:/app
+      - ./front:/app
     ports:
-      - 8001:8080
+      - 8001:8081
     links:
       - node

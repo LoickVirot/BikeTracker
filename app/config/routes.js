@@ -20,7 +20,7 @@ module.exports = {
 
         // Tracker CRUD
         server.post('/tracker', AuthMiddleware, TrackerController.post);
-        server.get('/tracker', AuthMiddleware, TrackerController.get);
+        server.get('/tracker', AuthMiddleware, TrackerController.list);
         server.get('/tracker/:id', AuthMiddleware, TrackerController.get);
         server.del('/tracker/:id', AuthMiddleware, TrackerController.delete);
         server.put('/tracker/:id', AuthMiddleware, TrackerController.put);
