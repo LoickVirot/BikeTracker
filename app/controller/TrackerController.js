@@ -60,7 +60,18 @@ module.exports = {
     },
 
     delete: async (req, res, next) => {
-        return next(new InternalErrorResponse('Not implemented'))   
+        let id = req.params.id;
+        try {
+            let tracker = await Tracker.findOneAndRemove({ _id: req.params.id })
+            if (tracker === null) {
+                res.send(new BadRequestResponse("Tracker not found"));
+                return next();
+            }
+            res.send(new SuccessResponse("OK"));
+            return next();
+        } catch (err) {
+            res.send(new InternalErrorResponse("Cannot delete tracker: " + err));
+        }
     }
 
 }
