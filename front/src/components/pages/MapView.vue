@@ -1,21 +1,21 @@
 <template>
   <div id="map-container">
     <main-menu-child v-if="selectedBike !== null" :bike="selectedBike"></main-menu-child>
-    <div id="map">
-      
-    </div>
+    <map-box height="100vh" :markers="bikes" :marker-on-click="selectBike.bind(this)"></map-box>
   </div>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 import { mapState, mapGetters } from 'vuex';
 import MainMenuChild from './map/MainMenuChild.vue';
+import MapBox from './map/MapBox.vue';
 
 export default {
   name: 'mapView',
   components: {
-    MainMenuChild
+    MainMenuChild,
+    MapBox
   },
   computed: {
     ...mapState({
@@ -25,46 +25,9 @@ export default {
       'selectedBike'
     ]),
   },
-  mounted () {
-    let position = [43.604652, 1.444209]; 
-    if (this.bikes[0] !== undefined) {
-      position = this.bikes[0].position
-    }
-    let markers = [];
-    var mymap = L.map('map').setView(position, 12);
-    
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox.streets',
-      accessToken: 'pk.eyJ1IjoibHZpcm90IiwiYSI6ImNqa2d1NWE2bDBreHkza21pNDB4eHo1bzYifQ.2MuyL9eFyNCf0xnpadqkMw'
-    }).addTo(mymap);
-
-    let self = this;
-    this.bikes.forEach(bike => {
-      let position = [
-        bike.position.lat,
-        bike.position.lng,
-      ];
-      let marker = L.marker(position).addTo(mymap);
-      marker.on('click', function() {
-        self.selectBike(bike)
-      });
-      var circle = L.circle(position, {
-        color: '#40b883',
-        fillColor: '#40b883',
-        fillOpacity: 0.1,
-        radius: 50
-      }).addTo(mymap);
-      marker.bindPopup(bike.name);
-      markers.push({
-        marker: marker,
-        circle: circle,
-      });
-    });
-  },
   methods: {
     selectBike(bike) {
+      console.log(bike);
       this.$store.dispatch('selectBike', bike)
     },
   }
@@ -80,7 +43,6 @@ export default {
   }
   #map {
     width: 100%;
-    height: 100vh;
     z-index: 1;
   }
 </style>

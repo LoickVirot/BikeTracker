@@ -24,7 +24,7 @@ export default {
   font-weight: 400;
 }
 .menu-item-child.selected {
-  background: red;
+  background: #FFF;
 }
 
 .menu-item-child:hover {

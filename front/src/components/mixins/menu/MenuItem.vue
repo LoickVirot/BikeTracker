@@ -22,7 +22,7 @@ export default {
   components: {
     MenuItemChild
   },
-  data: () => {
+  data() {
     return {
       showChilds: false,
     }
