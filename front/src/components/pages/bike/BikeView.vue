@@ -5,15 +5,7 @@
       <div class="column column-left">
         <card-box>
           <card-content>
-            <div class="battery">
-              <div class="battery-chart">
-                <canvas id="batteryChart" width="150" height="150"></canvas>
-              </div>
-              <div class="battery-percentage">
-                <span>BATTERIE</span>
-                <h1>70%</h1>
-              </div>
-            </div>
+            <battery-chart :percentage="battery"></battery-chart>
           </card-content>
         </card-box>
       </div>
@@ -32,14 +24,16 @@
 </template>
 <script>
 import MapBox from '../map/MapBox.vue';
+import BatteryChart from './BatteryChart.vue';
 import CardBox from './../../mixins/card/CardBox.vue';
 import CardContent from './../../mixins/card/CardContent.vue';
 
 export default {
   components: {
     MapBox,
+    BatteryChart,
     CardBox,
-    CardContent
+    CardContent,
   },
   data() {
     return {
@@ -49,35 +43,8 @@ export default {
           name: 'Test',
         },
       ],
+      battery: 67,
     };
-  },
-  mounted() {
-    let ctx = document.getElementById("batteryChart").getContext('2d');
-    let myChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ["Batterie restante", "Batterie finie"],
-        datasets: [{
-          data: [70, 100-70],
-          backgroundColor: [
-            '#40b883',
-            '#EAEAEA'
-          ],
-        }],
-      },
-      options: {
-        legend: {
-          display: false,
-        },
-        tooltips: {
-          enabled: false,
-        },
-        rotation: -0.5 * Math.PI,
-        hover: {mode: null},
-        maintainAspectRatio: false,
-        cutoutPercentage: 70,
-      }
-    });
   },
 };
 </script>
@@ -95,28 +62,5 @@ export default {
   .column {
     margin: 10px;
     flex: 1;
-  }
-
-  .battery {
-    display: flex;
-  }
-
-  .battery-chart {
-    width: 150px;
-  }
-
-  .battery-percentage {
-    margin: auto 20px;
-  }
-
-  .battery-percentage span {
-    font-weight: bold;
-    color: #CCC;
-  }
-
-  .battery-percentage h1 {
-    font-weight: 100;
-    font-size: 3.5em;
-    margin: 0;
   }
 </style>
