@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     selectBike(bike) {
-      console.log(bike);
       this.$store.dispatch('selectBike', bike)
     },
   }

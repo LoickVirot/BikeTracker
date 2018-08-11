@@ -23,8 +23,6 @@ export default {
     let position = [43.604652, 1.444209];
     let mapMarkers = [];
 
-    console.log(this.markerOnClick);
-
     setTimeout(() => {
       var mymap = L.map(this.id).setView(position, 12);
 

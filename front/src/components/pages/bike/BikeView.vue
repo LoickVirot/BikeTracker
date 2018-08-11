@@ -3,31 +3,38 @@
     <h1>Yamaha YBR 125</h1>
     <div class="table">
       <div class="column column-left">
-        <div class="card">
-          <div class="card-content">
+        <card-box>
+          <card-content>
             <h2>Statistiques</h2>
-          </div>
-        </div>
+            <div class="battery">
+              
+            </div>
+          </card-content>
+        </card-box>
       </div>
       <div class="column column-right">
-        <div class="card">
-          <div class="card-content">
+       <card-box>
+          <card-content>
             <h2>Alertes</h2>
-          </div>
-        </div>
+          </card-content>
+        </card-box>
       </div>
     </div>
-    <div class="card map">
+    <card-box>
       <map-box :markers="markers" height="500px"></map-box>
-    </div>
+    </card-box>
   </div>
 </template>
 <script>
 import MapBox from '../map/MapBox.vue';
+import CardBox from './../../mixins/card/CardBox.vue';
+import CardContent from './../../mixins/card/CardContent.vue';
 
 export default {
   components: {
     MapBox,
+    CardBox,
+    CardContent
   },
   data() {
     return {
@@ -49,26 +56,11 @@ export default {
   .table {
     display: flex;
     margin: 0 -10px;
+    margin-bottom: 10px;
   }
 
   .column {
     margin: 10px;
     flex: 1;
   }
-
-  .card {
-    background: #FFF;
-    border-radius: 5px;
-    border: 1px solid #CCC;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .card h2 {
-    margin: 0;
-  }
-
-  .card .card-content {
-    padding: 10px;
-  }
-
 </style>
