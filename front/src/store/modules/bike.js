@@ -9,6 +9,23 @@ export default {
           lng: 1.4565721999999823
         },
         battery: 32,
+        alerts: [
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            content: 'Test',
+            level: 2
+          },
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            content: 'Test alerte 2',
+            level: 0
+          },
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            content: 'Heeeeyyy',
+            level: 0
+          },
+        ]
       },
       {
         id: 1321546,
@@ -18,6 +35,23 @@ export default {
           lng: 1.466348499999981
         },
         battery: 76,
+        alerts: [
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            content: 'Niveau de batterie en dessous de 50%',
+            level: 1
+          },
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            content: 'Secousses sur la moto',
+            level: 1
+          },
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            content: 'Déplacement de la moto hors de la zone de sécurité',
+            level: 0
+          },
+        ]
       },
     ],
     selected: null

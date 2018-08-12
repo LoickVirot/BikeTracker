@@ -1,6 +1,12 @@
 <template>
   <div :class="!radius ? 'alerts alerts-no-radius': 'alerts'">
-    <div class="alert alert-normal">
+    <alert-item 
+    v-for="(alert, index) in selectedBike.alerts"
+    :key="index"
+    :date="alert.date" 
+    :message="alert.content"
+    :level="alert.level"></alert-item>
+    <!-- <div class="alert alert-normal">
       <div class="alert-date">5/08/2018 - 19:14</div>
       <div class="alert-content">Niveau de batterie en dessous de 50%</div>
     </div>
@@ -14,24 +20,38 @@
     </div>
     <div class="alert">
       <a href="">Toutes les alertes...</a>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex';
+import AlertItem from './AlertItem.vue';
 
 export default {
   name: 'alertSummary',
+  components: {
+    AlertItem,
+  },
   props: {
     radius: {
       default: true
+    }
+  },
+  data() {
+    return {
+      alerts: [],
     }
   },
   beforeMount() {
     if (this.radius === undefined) {
       this.radius = false;
     }
+  },
+  computed: {
+    ...mapGetters([
+      'selectedBike'
+    ]),
   }
 };
 
@@ -43,12 +63,6 @@ export default {
   overflow: hidden;
 }
 
-.alert {
-  padding: 10px;
-  border-left: #FFF 5px solid;
-  border-bottom: 1px solid #DDD;
-}
-
 .alerts.alerts-no-radius {
   border-radius: 0px;
   border-right: none;
@@ -56,28 +70,5 @@ export default {
 
 .alert:last-child {
   border-bottom: none;
-}
-
-.alert .alert-date {
-  font-size: 0.7em;
-  color: #999;
-}
-
-.alert.alert-normal {
-  border-left: #40b883 5px solid;
-}
-
-.alert.alert-medium {
-  border-left: #ffd14d 5px solid;
-}
-
-.alert.alert-critical {
-  border-left: #ff5151 5px solid;
-}
-
-.alert a {
-  color: inherit;
-  text-decoration: none;
-  font-size: 0.9em;
 }
 </style>
