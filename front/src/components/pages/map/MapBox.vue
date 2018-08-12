@@ -22,10 +22,14 @@ export default {
     this.id = 'map-' + this._uid
     let self = this;
 
-    let position = [43.604652, 1.444209];
+    let position = this.markers[0].position || [43.604652, 1.444209];
 
     setTimeout(() => {
-      var mymap = L.map(this.id).setView(position, 12);
+      // var mymap = L.map(this.id).setView(position, 20);
+      var mymap = L.map(this.id).fitBounds(this.markers.map(marker => {
+        return marker.position 
+      }));
+      mymap.setZoom(mymap.getZoom() - 1);
 
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -65,10 +69,9 @@ export default {
         this.mapMarkers[index].marker.setLatLng(marker.position);
         this.mapMarkers[index].circle.setLatLng(marker.position);
       });
+      this.map.panTo(this.mapMarkers[0].marker.getLatLng())
     },
   },
-  methods: {
-  }
 };
 </script>
 <style>
