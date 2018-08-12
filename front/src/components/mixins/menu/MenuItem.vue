@@ -1,10 +1,14 @@
 <template>
   <div class="menu-item">
-    <div class="name" v-on:click="() => this.showChilds = !this.showChilds">
-      <font-awesome-icon :icon="icon" v-if="icon !== null" /><span>{{ title }}</span>
-    </div>
-    <div class="childs" v-if="showChilds" v-for="child in childs" :key="child.id">
-      <menu-item-child :title="child.name"></menu-item-child>
+    <router-link :to="link">
+      <div class="name" v-on:click="() => this.showChilds = !this.showChilds">
+        <font-awesome-icon :icon="icon" v-if="icon !== null" /><span>{{ title }}</span>
+      </div>
+    </router-link>
+    <div class="childs" v-if="showChilds">
+      <div class="child" v-for="child in childs" :key="child.id">
+        <menu-item-child :title="child.name" :url="child.url"></menu-item-child>
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +21,8 @@ export default {
   props: [
     'title',
     'icon',
-    'childs'
+    'childs',
+    'link'
   ],
   components: {
     MenuItemChild
@@ -38,6 +43,11 @@ export default {
     transition: all .15s ease;
     font-size: 0.9em;
     color: #333;
+  }
+
+  .menu-item a {
+    color: #333;
+    text-decoration: none;
   }
 
   .menu-item .name {

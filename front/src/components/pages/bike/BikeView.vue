@@ -1,6 +1,6 @@
 <template>
   <div class="bike-view">
-    <h1>Yamaha YBR 125</h1>
+    <h1>{{ selectedBike.name }}</h1>
     <div class="table">
       <div class="column column-left">
         <card-box>
@@ -27,6 +27,7 @@ import MapBox from '../map/MapBox.vue';
 import BatteryChart from './BatteryChart.vue';
 import CardBox from './../../mixins/card/CardBox.vue';
 import CardContent from './../../mixins/card/CardContent.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -43,9 +44,31 @@ export default {
           name: 'Test',
         },
       ],
-      battery: 67,
+      battery: 100,
     };
   },
+  computed: {
+    ...mapGetters([
+      'selectedBike'
+    ]),
+  },
+  beforeMount() {
+    this.loadBike(this.$route.params.id);
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.loadBike(to.params.id);
+    next();
+  },
+  beforeRouteLeave(to, from, next){
+    this.$store.dispatch('deselectAll');
+    next();
+  },
+  methods: {
+    loadBike(id) {
+      this.$store.dispatch('selectBikeById', id);
+      this.battery = this.selectedBike.battery;
+    }
+  }
 };
 </script>
 <style>

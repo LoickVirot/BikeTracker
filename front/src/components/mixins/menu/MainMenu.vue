@@ -4,9 +4,9 @@
       <div class="icon">
         <h2>Tracker moto</h2>
       </div>
-      <menu-item title="carte" icon="map"></menu-item>
-      <menu-item title="Mes motos" icon="motorcycle" :childs="bikes"></menu-item>
-      <menu-item title="Paramètres" icon="cog" :childs="parameters"></menu-item>
+      <menu-item title="carte" icon="map" link='/'></menu-item>
+      <menu-item title="Mes motos" icon="motorcycle" :childs="bikes" link='#'></menu-item>
+      <menu-item title="Paramètres" icon="cog" :childs="parameters" link='#'></menu-item>
     </div>
   </div>
 </template>
@@ -34,6 +34,9 @@ export default {
   },
   beforeMount() {
     console.log(this.selectedBike)
+    this.bikes.map(bike => {
+      bike.url = '/bike/' + bike.id;
+    })
   },
   mounted() {
     console.log(this.bikes)

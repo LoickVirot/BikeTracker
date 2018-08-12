@@ -1,7 +1,9 @@
 <template>
-  <div class="menu-item-child" :class="{selected: selected}">
-    {{ title }}
-  </div>
+  <router-link :to="url">
+    <div class="menu-item-child" :class="{selected: selected}">
+      {{ title }}
+    </div>
+  </router-link>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
@@ -10,8 +12,9 @@ export default {
   name: 'menuItemChild',
   props: [
     'title',
-    'selected'
-  ]
+    'selected',
+    'url'
+  ],
 };
 
 </script>
