@@ -40,7 +40,7 @@ export default {
     return {
       markers: [
         {
-          position: [43.604652, 1.444209],
+          position: [0, 0],
           name: 'Test',
         },
       ],
@@ -67,6 +67,10 @@ export default {
     loadBike(id) {
       this.$store.dispatch('selectBikeById', id);
       this.battery = this.selectedBike.battery;
+      this.$set(this.markers, 0, {
+        position: [this.selectedBike.position.lat, this.selectedBike.position.lng],
+        name: this.markers[0].name
+      });
     }
   }
 };

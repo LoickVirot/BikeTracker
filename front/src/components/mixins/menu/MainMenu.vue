@@ -23,9 +23,21 @@ export default {
   data() {
     return {
       parameters: [
-        {name: "Mon compte"},
-        {name: "Mes trackers"},
-        {name: "Mes motos"}
+        {
+          id: 0,
+          name: "Mon compte",
+          url: '#',
+        },
+        {
+          id: 1,
+          name: "Mes trackers",
+          url: '#',
+          },
+        {
+          id: 2,
+          name: "Mes motos",
+          url: '#',
+        }
       ]
     }
   },

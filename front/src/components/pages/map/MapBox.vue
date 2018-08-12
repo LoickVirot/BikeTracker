@@ -13,7 +13,9 @@ export default {
   data () {
     return {
       id: null,
-      style: 'height: '+ this.height + ';'
+      style: 'height: '+ this.height + ';',
+      map: null,
+      mapMarkers: [],
     }
   },
   mounted () {
@@ -21,7 +23,6 @@ export default {
     let self = this;
 
     let position = [43.604652, 1.444209];
-    let mapMarkers = [];
 
     setTimeout(() => {
       var mymap = L.map(this.id).setView(position, 12);
@@ -49,14 +50,25 @@ export default {
             radius: 50
           }).addTo(mymap);
           mapMarker.bindPopup(marker.name);
-          mapMarkers.push({
+          this.mapMarkers.push({
             marker: mapMarker,
             circle: circle,
           });
         });
       }
+      this.map = mymap;
     });
   },
+  watch: {
+    markers: async function(newVal, oldVal) {
+      await newVal.map((marker, index) => {
+        this.mapMarkers[index].marker.setLatLng(marker.position);
+        this.mapMarkers[index].circle.setLatLng(marker.position);
+      });
+    },
+  },
+  methods: {
+  }
 };
 </script>
 <style>
