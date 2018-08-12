@@ -12,8 +12,9 @@
       <div class="column column-right">
        <card-box>
           <card-content>
-            <h2>Alertes</h2>
+            <h2>Dernières alertes</h2>
           </card-content>
+          <alert-summary :radius="false"></alert-summary>
         </card-box>
       </div>
     </div>
@@ -23,11 +24,12 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+import AlertSummary from '../alerts/AlertSummary.vue';
 import MapBox from '../map/MapBox.vue';
 import BatteryChart from './BatteryChart.vue';
 import CardBox from './../../mixins/card/CardBox.vue';
 import CardContent from './../../mixins/card/CardContent.vue';
-import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -35,6 +37,7 @@ export default {
     BatteryChart,
     CardBox,
     CardContent,
+    AlertSummary,
   },
   data() {
     return {

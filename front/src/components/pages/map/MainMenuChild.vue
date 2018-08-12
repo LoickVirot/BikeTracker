@@ -14,31 +14,19 @@
       </div>
     </div>
     <h3>Dernières alertes</h3>
-    <div class="alerts">
-      <div class="alert alert-normal">
-        <div class="alert-date">5/08/2018 - 19:14</div>
-        <div class="alert-content">Niveau de batterie en dessous de 50%</div>
-      </div>
-      <div class="alert alert-medium">
-        <div class="alert-date">5/08/2018 - 18;10</div>
-        <div class="alert-content">Secousse sur la moto</div>
-      </div>
-      <div class="alert alert-critical">
-        <div class="alert-date">3/08/2018 - 10:12</div>
-        <div class="alert-content">Déplacement de la moto hors de la zone de sécurité</div>
-      </div>
-      <div class="alert">
-        <a href="">Toutes les alertes...</a>
-      </div>
-    </div>
+    <alert-summary></alert-summary>
   </div>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex';
+import AlertSummary from '../alerts/AlertSummary.vue';
 
 export default {
   name: 'mainMenuChild',
+  components: {
+    AlertSummary
+  },
   props: [
     'bike'
   ],
@@ -73,14 +61,19 @@ export default {
 
 .alerts {
   border: 1px solid #DDD;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .alert {
   padding: 10px;
-  border-left: #CCC 5px solid;
+  border-left: #FFF 5px solid;
   border-bottom: 1px solid #DDD;
+}
+
+.alerts.alerts-no-radius {
+  border-radius: 0px;
+  border-right: none;
 }
 
 .alert:last-child {
