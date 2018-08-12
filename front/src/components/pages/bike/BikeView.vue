@@ -69,7 +69,10 @@ export default {
       this.battery = this.selectedBike.battery;
       this.$set(this.markers, 0, {
         position: [this.selectedBike.position.lat, this.selectedBike.position.lng],
-        name: this.markers[0].name
+        name: "<b>Lat : </b>"
+         + this.selectedBike.position.lat 
+         + "<br><b>Long : </b>" 
+         + this.selectedBike.position.lng,
       });
     }
   }

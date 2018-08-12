@@ -67,8 +67,10 @@ export default {
     markers: async function(newVal, oldVal) {
       await newVal.map((marker, index) => {
         this.mapMarkers[index].marker.setLatLng(marker.position);
+        this.mapMarkers[index].marker.bindPopup(marker.name);
         this.mapMarkers[index].circle.setLatLng(marker.position);
       });
+      this.map.setZoomAround(this.mapMarkers[0].marker.getLatLng(), 20);
       this.map.panTo(this.mapMarkers[0].marker.getLatLng())
     },
   },
