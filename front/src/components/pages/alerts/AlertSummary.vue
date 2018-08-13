@@ -6,21 +6,6 @@
     :date="alert.date" 
     :message="alert.content"
     :level="alert.level"></alert-item>
-    <!-- <div class="alert alert-normal">
-      <div class="alert-date">5/08/2018 - 19:14</div>
-      <div class="alert-content">Niveau de batterie en dessous de 50%</div>
-    </div>
-    <div class="alert alert-medium">
-      <div class="alert-date">5/08/2018 - 18;10</div>
-      <div class="alert-content">Secousse sur la moto</div>
-    </div>
-    <div class="alert alert-critical">
-      <div class="alert-date">3/08/2018 - 10:12</div>
-      <div class="alert-content">Déplacement de la moto hors de la zone de sécurité</div>
-    </div>
-    <div class="alert">
-      <a href="">Toutes les alertes...</a>
-    </div> -->
   </div>
 </template>
 <script>

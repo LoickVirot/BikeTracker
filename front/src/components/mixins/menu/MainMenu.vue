@@ -6,7 +6,7 @@
       </div>
       <menu-item title="carte" icon="map" link='/'></menu-item>
       <menu-item title="Mes motos" icon="motorcycle" :childs="bikes" link='#'></menu-item>
-      <menu-item title="Paramètres" icon="cog" :childs="parameters" link='#'></menu-item>
+      <menu-item title="Paramètres" icon="cog" link='/settings'></menu-item>
     </div>
   </div>
 </template>
@@ -19,27 +19,6 @@ export default {
   name: 'mainMenu',
   components: {
     MenuItem
-  },
-  data() {
-    return {
-      parameters: [
-        {
-          id: 0,
-          name: "Mon compte",
-          url: '#',
-        },
-        {
-          id: 1,
-          name: "Mes trackers",
-          url: '#',
-          },
-        {
-          id: 2,
-          name: "Mes motos",
-          url: '#',
-        }
-      ]
-    }
   },
   computed: {
     
