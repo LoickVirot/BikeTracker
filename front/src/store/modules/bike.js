@@ -5,8 +5,8 @@ export default {
         id: 132456,
         name: "Yamaha YBR 125",
         position: {
-          lat: 43.6095736,
-          lng: 1.4565721999999823
+          lat: 43.6051112,
+          lng: 1.4426178999999593
         },
         battery: 32,
         alerts: [
@@ -31,8 +31,8 @@ export default {
         id: 1321546,
         name: "Honda Transalp 600",
         position: {
-          lat: 43.5552292,
-          lng: 1.466348499999981
+          lat: 43.64709329999999,
+          lng: 1.4254163000000517
         },
         battery: 76,
         alerts: [
