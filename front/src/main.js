@@ -12,6 +12,28 @@ import routes from './routes';
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
+  mode: 'history'
+});
+
+router.beforeEach((to, from, next) => {
+  console.log(from.fullPath !== '/login');
+  next();
+  if (store.state.auth.user.username == null) {
+    if (from.fullPath !== '/login') { // Prevent infinite loops 
+      next({
+        path: '/login',
+      });
+    }
+  }
+  else {
+    // Try to access to login page
+    if (to.fullPath == '/login') {
+      next({
+        path: '/'
+      });
+    }
+  }
+  next();
 });
 
 library.add(faMap);
