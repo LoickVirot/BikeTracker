@@ -15,9 +15,10 @@ export default {
     box-sizing: border-box;
     display: block;
     margin: 10px 0;
-    padding: 10px 14px;;
-    border-radius: 8px;
-    border: 1px solid #CCC;
+    padding: 15px;
+    border-radius: 3px;
+    border: 2px solid #EAEAEA;
+    background: #f9f9f9;
     font-size: 1em;
     width: 100%;
   }
@@ -25,4 +26,6 @@ export default {
   input:disabled {
     background: #EAEAEA;
   }
+
+  
 </style>

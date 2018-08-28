@@ -4,10 +4,16 @@
     <card-box class="login-card">
       <card-content>
         <h1>Connexion</h1>
-        <input-form type="text" placeholder="Nom d'utilisateur" />
-        <input-form type="password" placeholder="Mot de passe" />
-        <input-form type="submit" value="Se connecter" />
-        <a href="#" class="forgot-pass">Mot de passe oublié</a>
+        <div class="form-group">
+          <input-form type="text" id="login-username" placeholder="Nom d'utilisateur" />
+        </div>
+        <div class="form-group">
+          <input-form type="password" id="login-password" placeholder="Mot de passe" />
+        </div>
+        <div class="form-group buttons">
+          <a href="#" class="forgot-pass">Mot de passe oublié</a>
+          <button-item type="primary" value="Se connecter" />
+        </div>
       </card-content>
     </card-box>
   </div>
@@ -16,12 +22,14 @@
 import CardBox from '../../mixins/card/CardBox.vue';
 import CardContent from '../../mixins/card/CardContent.vue';
 import InputForm from '../../mixins/form/InputForm.vue';
+import ButtonItem from '../../mixins/form/ButtonItem.vue';
 
 export default {
   components: {
     CardBox,
     CardContent,
     InputForm,
+    ButtonItem,
   }
 }
 </script>
@@ -54,9 +62,24 @@ export default {
 }
 
 .login-card .forgot-pass {
-  text-align: left;
+  text-align: right;
   font-size: 0.8em;
   color: #333;
+  margin: 10px;
+}
+
+#login-page .form-group {
+  margin-top: 20px;
+}
+
+#login-page .form-group label {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+#login-page .buttons {
+  display: flex;
+  justify-content: space-between
 }
 
 </style>
