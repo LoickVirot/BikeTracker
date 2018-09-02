@@ -5,20 +5,21 @@
       <card-content>
         <h1>Connexion</h1>
         <div class="form-group">
-          <input-form type="text" id="login-username" placeholder="Nom d'utilisateur" />
+          <input-form type="text" id="login-username" placeholder="Nom d'utilisateur" :model.sync="username"/>
         </div>
         <div class="form-group">
-          <input-form type="password" id="login-password" placeholder="Mot de passe" />
+          <input-form type="password" id="login-password" placeholder="Mot de passe" :model="password" />
         </div>
         <div class="form-group buttons">
           <a href="#" class="forgot-pass">Mot de passe oublié</a>
-          <button-item type="primary" value="Se connecter" />
+          <button-item type="primary" value="Se connecter" :onClick="test.bind(this)"/>
         </div>
       </card-content>
     </card-box>
   </div>
 </template>
 <script>
+
 import CardBox from '../../mixins/card/CardBox.vue';
 import CardContent from '../../mixins/card/CardContent.vue';
 import InputForm from '../../mixins/form/InputForm.vue';
@@ -30,8 +31,21 @@ export default {
     CardContent,
     InputForm,
     ButtonItem,
-  }
-}
+  },
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  methods: {
+    test() {
+      console.log(this.username);
+      console.log(this.password);
+      this.$store.dispatch('login', this.username, this.password);
+    },
+  },
+};
 </script>
 <style>
 #login-page {
@@ -81,5 +95,4 @@ export default {
   display: flex;
   justify-content: space-between
 }
-
 </style>

@@ -1,22 +1,28 @@
 <template>
-  <button :class="classes">{{ this.value }}</button>
+  <button :class="classes" @click="onClick">{{ this.value }}</button>
 </template>
 <script>
 export default {
   props: [
     'type',
-    'value'
+    'value',
+    'onClick'
   ],
   data() {
     return {
-      classes: "btn "
-    }
+      classes: 'btn ',
+    };
   },
   beforeMount() {
     if (this.type !== undefined) {
-      this.classes += this.type
+      this.classes += this.type;
     }
   },
+  methods: {
+    emitClickEvent() {
+      this.$emit('clicked');
+    }
+  }
 };
 </script>
 <style>

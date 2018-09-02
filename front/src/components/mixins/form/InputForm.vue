@@ -1,13 +1,18 @@
 <template>
-  <input :type="type" :placeholder="placeholder" :value="value"/>
+  <input :type="type" :placeholder="placeholder" :value="value" @input="updateValue($event.target.value)"/>
 </template>
 <script>
 export default {
   props: [
     'type',
     'placeholder',
-    'value'
+    'value',
   ],
+  methods: {
+    updateValue(value) {
+      this.$emit('input', value)
+    }
+  }
 };
 </script>
 <style>
@@ -26,6 +31,4 @@ export default {
   input:disabled {
     background: #EAEAEA;
   }
-
-  
 </style>

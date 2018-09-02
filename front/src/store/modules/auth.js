@@ -6,6 +6,11 @@ export default {
     },
   },
   mutations: {},
-  actions: {},
+  actions: {
+    login({commit, state}, username, password) {
+      console.log(username);
+      console.log(password);
+    }
+  },
   getters: {},
 };
