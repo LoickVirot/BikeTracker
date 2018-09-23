@@ -2,6 +2,8 @@ version: '2'
 services:
   mongo:
     image: mongo
+    ports:
+      - 1338:27017
   node:
     build: docker/node
     user: node

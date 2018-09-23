@@ -1,9 +1,10 @@
-var DefaultController = require('../controller/DefaultController')
-var UserController = require('../controller/UserController')
-var AuthController = require('../controller/AuthController')
-var TrackerController = require('../controller/TrackerController')
+var DefaultController = require('../controller/DefaultController');
+var UserController = require('../controller/UserController');
+var AuthController = require('../controller/AuthController');
+var TrackerController = require('../controller/TrackerController');
+let TestHookController = require('../controller/TestHookController');
 
-var AuthMiddleware = require('../middlewares/AuthMiddleware')
+var AuthMiddleware = require('../middlewares/AuthMiddleware');
 
 module.exports = {
     init: (server) => {
@@ -27,5 +28,8 @@ module.exports = {
 
         // Auth
         server.post('/login', AuthController.login);
+
+        // TestHook
+        server.post('/testhook', TestHookController.post);
     }
 }
