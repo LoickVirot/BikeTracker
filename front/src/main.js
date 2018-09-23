@@ -16,7 +16,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(from.fullPath !== '/login');
   next();
   if (store.state.auth.user.username == null) {
     if (from.fullPath !== '/login') { // Prevent infinite loops 

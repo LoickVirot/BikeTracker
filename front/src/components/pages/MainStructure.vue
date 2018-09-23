@@ -1,6 +1,6 @@
 <template>
   <div class="mainStructure">
-    <main-menu v-if="user.username !== null"></main-menu>
+    <main-menu v-show="user.username !== null"></main-menu>
     <div class="main-structure">
       <router-view></router-view>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <input :type="type" :placeholder="placeholder" :value="value" @input="updateValue($event.target.value)"/>
+  <input :type="type" :placeholder="placeholder" @input="updateValue($event.target.value)" v-model="mutableValue"/>
 </template>
 <script>
 export default {
@@ -8,6 +8,11 @@ export default {
     'placeholder',
     'value',
   ],
+  data() {
+    return {
+      mutableValue: this.value
+    };
+  },
   methods: {
     updateValue(value) {
       this.$emit('input', value)

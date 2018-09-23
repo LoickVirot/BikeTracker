@@ -5,10 +5,10 @@
       <card-content>
         <h1>Connexion</h1>
         <div class="form-group">
-          <input-form type="text" id="login-username" placeholder="Nom d'utilisateur" :model.sync="username"/>
+          <input-form type="text" id="login-username" placeholder="Nom d'utilisateur" v-model="username"/>
         </div>
         <div class="form-group">
-          <input-form type="password" id="login-password" placeholder="Mot de passe" :model="password" />
+          <input-form type="password" id="login-password" placeholder="Mot de passe" v-model="password" />
         </div>
         <div class="form-group buttons">
           <a href="#" class="forgot-pass">Mot de passe oublié</a>
@@ -39,10 +39,14 @@ export default {
     };
   },
   methods: {
-    test() {
-      console.log(this.username);
-      console.log(this.password);
-      this.$store.dispatch('login', this.username, this.password);
+    async test() {
+      let result = await this.$store.dispatch('login', {
+        username: this.username, 
+        password: this.password
+      });
+      if (result == undefined) {
+        this.$router.push('/')
+      }
     },
   },
 };
