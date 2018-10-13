@@ -7,8 +7,7 @@ export default {
   },
   mutations: {
     loginUser(state, accountInfo) {
-      state.username = accountInfo.username;
-      console.log('Succesfully logged in');
+      state.user.username = accountInfo.username;
     }
   },
   actions: {
