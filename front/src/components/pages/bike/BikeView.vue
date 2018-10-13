@@ -15,6 +15,7 @@
             <h2>Dernières alertes</h2>
           </card-content>
           <alert-summary :radius="false"></alert-summary>
+          <router-link :to="'/bike/' + selectedBike.id + '/alerts'">Toutes les alertes</router-link>
         </card-box>
       </div>
     </div>
