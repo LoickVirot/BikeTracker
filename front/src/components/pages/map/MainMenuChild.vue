@@ -14,18 +14,23 @@
       </div>
     </div>
     <h3>Dernières alertes</h3>
-    <alert-summary></alert-summary>
+    <alert-summary limit="3"></alert-summary>
+    <link-item :to="'/bike/' + bike.id + '/alerts'" class="all-alert-link">
+      <font-awesome-icon icon="arrow-right"></font-awesome-icon>&nbsp;Toutes les alertes
+    </link-item>
   </div>
 </template>
 <script>
 /* eslint linebreak-style: ["error", "windows"] */
 import { mapGetters, mapActions } from 'vuex';
 import AlertSummary from '../alerts/AlertSummary.vue';
+import LinkItem from '../../mixins/LinkItem.vue';
 
 export default {
   name: 'mainMenuChild',
   components: {
-    AlertSummary
+    AlertSummary,
+    LinkItem
   },
   props: [
     'bike'
@@ -100,6 +105,12 @@ export default {
 .alert a {
   color: inherit;
   text-decoration: none;
+  font-size: 0.9em;
+}
+
+.all-alert-link {
+  display: block;
+  margin-top: 10px;
   font-size: 0.9em;
 }
 </style>

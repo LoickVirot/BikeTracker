@@ -1,7 +1,7 @@
 <template>
   <div :class="!radius ? 'alerts alerts-no-radius': 'alerts'">
     <alert-item 
-    v-for="(alert, index) in selectedBike.alerts"
+    v-for="(alert, index) in getAlerts"
     :key="index"
     :date="alert.date" 
     :message="alert.content"
@@ -21,6 +21,9 @@ export default {
   props: {
     radius: {
       default: true
+    },
+    limit: {
+      default: -1
     }
   },
   data() {
@@ -37,6 +40,13 @@ export default {
     ...mapGetters([
       'selectedBike'
     ]),
+    getAlerts() {
+      let alertList = this.selectedBike.alerts;
+      if (this.limit < 0) {
+        return alertList;
+      }
+      return alertList.slice(0, this.limit);
+    }
   }
 };
 

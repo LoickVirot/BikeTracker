@@ -34,6 +34,7 @@ export default {
   methods: {
     chooseAlertColor() {
       this.className = 'alert ';
+      console.log(parseInt(this.level))
       switch(parseInt(this.level)) {
         case AlertLevel.CRITICAL:
           this.className += 'alert-critical'
@@ -47,7 +48,8 @@ export default {
       }
     },
     formatDate() {
-      this.formatedDate = this.date.toLocaleTimeString('fr-FR', {
+      let dateDate = new Date(this.date);
+      this.formatedDate = dateDate.toLocaleTimeString('fr-FR', {
         weekday: 'short',
         month: 'short',
         day: 'numeric',

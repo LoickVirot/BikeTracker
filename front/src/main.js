@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMap, faCog, faMotorcycle, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faMap, faCog, faMotorcycle, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import App from './App.vue';
@@ -39,6 +39,7 @@ library.add(faMap);
 library.add(faCog);
 library.add(faMotorcycle);
 library.add(faArrowLeft);
+library.add(faArrowRight);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

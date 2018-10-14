@@ -10,12 +10,13 @@
         </card-box>
       </div>
       <div class="column column-right">
-       <card-box>
+        <card-box>
+          <alert-summary :radius="false" limit="3"></alert-summary>
           <card-content>
-            <h2>Dernières alertes</h2>
-          </card-content>
-          <alert-summary :radius="false"></alert-summary>
-          <router-link :to="'/bike/' + selectedBike.id + '/alerts'">Toutes les alertes</router-link>
+            <link-item :to="'/bike/' + selectedBike.id + '/alerts'">
+              <font-awesome-icon icon="arrow-right"></font-awesome-icon>&nbsp;Toutes les alertes
+            </link-item>
+        </card-content>
         </card-box>
       </div>
     </div>
@@ -31,6 +32,7 @@ import MapBox from '../map/MapBox.vue';
 import BatteryChart from './BatteryChart.vue';
 import CardBox from './../../mixins/card/CardBox.vue';
 import CardContent from './../../mixins/card/CardContent.vue';
+import LinkItem from './../../mixins/LinkItem.vue';
 
 export default {
   components: {
@@ -39,6 +41,7 @@ export default {
     CardBox,
     CardContent,
     AlertSummary,
+    LinkItem
   },
   data() {
     return {

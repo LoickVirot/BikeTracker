@@ -1,5 +1,8 @@
 <template>
-  <button :class="classes" @click="onClick">{{ this.value }}</button>
+  <button :class="classes" @click="onClickAction">
+    {{ this.value }}
+    <slot></slot>
+  </button>
 </template>
 <script>
 export default {
@@ -11,18 +14,17 @@ export default {
   data() {
     return {
       classes: 'btn ',
+      onClickAction: () => {return false}
     };
   },
   beforeMount() {
     if (this.type !== undefined) {
       this.classes += this.type;
     }
-  },
-  methods: {
-    emitClickEvent() {
-      this.$emit('clicked');
+    if (this.onClick !== undefined) {
+      this.onClickAction = this.onClick
     }
-  }
+  },
 };
 </script>
 <style>
@@ -33,11 +35,18 @@ export default {
     border: none;
     font-size: 0.9em;
     cursor: pointer;
+    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
   }
 
   .btn.primary {
     background: #42b883;
     color: #FFF;
-    font-weight: bold;
+  }
+
+  .btn.secondary {
+    background: none;
+    color: #AAA;
+    font-size: 1.4em;
+    padding: 0;
   }
 </style>

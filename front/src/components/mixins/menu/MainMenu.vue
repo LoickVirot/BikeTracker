@@ -24,14 +24,11 @@ export default {
     
   },
   beforeMount() {
-    console.log(this.selectedBike)
     this.bikes.map(bike => {
       bike.url = '/bike/' + bike.id;
     })
   },
   mounted() {
-    console.log(this.bikes)
-    console.log(this.selectedBike)
   },
   computed: {
     ...mapState({
@@ -49,7 +46,7 @@ export default {
   #main-menu .main-menu-container {
     background: white;
     width: 250px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     top: 0;
     left: 0;
