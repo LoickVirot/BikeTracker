@@ -1,7 +1,7 @@
 <template>
   <div id="map-container">
     <main-menu-child v-if="selectedBike !== null" :bike="selectedBike"></main-menu-child>
-    <map-box height="100vh" :markers="bikes" :marker-on-click="selectBike.bind(this)"></map-box>
+    <map-box height="100vh" :markers="getBikesPositions" :marker-on-click="selectBike.bind(this)"></map-box>
   </div>
 </template>
 <script>
@@ -17,6 +17,11 @@ export default {
     MainMenuChild,
     MapBox
   },
+  data() {
+    return {
+      bikesPositions: [],
+    }
+  },
   computed: {
     ...mapState({
       bikes: state => state.bike.bikes
@@ -24,6 +29,20 @@ export default {
     ...mapGetters([
       'selectedBike'
     ]),
+    getBikesPositions() {
+      let bikes = this.bikes;
+      let positions = [];
+      bikes.forEach(bike => {
+        positions.push({
+          position: bike.positions[0],
+          name: bike.name,
+          id: bike.id,
+          icon: 'bike'
+        });
+      });
+      console.log(positions)
+      return positions;
+    }
   },
   methods: {
     selectBike(bike) {

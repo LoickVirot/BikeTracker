@@ -74,13 +74,28 @@ export default {
     loadBike(id) {
       this.$store.dispatch('selectBikeById', id);
       this.battery = this.selectedBike.battery;
-      this.$set(this.markers, 0, {
-        position: [this.selectedBike.position.lat, this.selectedBike.position.lng],
-        name: "<b>Lat : </b>"
-         + this.selectedBike.position.lat 
-         + "<br><b>Long : </b>" 
-         + this.selectedBike.position.lng,
+      this.selectedBike.positions.forEach((position, index) => {
+        let dateDate = new Date(position.date);
+        let dateStr = dateDate.toLocaleTimeString('fr-FR', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',        
+        });
+
+        this.$set(this.markers, index, {
+          position: [position.lat, position.lng],
+          name: 
+          '<b>Date : </b>' + dateStr
+          + "<br><b>Lat : </b>"
+          + position.lat 
+          + "<br><b>Long : </b>" 
+          + position.lng,
+        });
       });
+
+      this.markers[0].icon = 'bike'
     }
   }
 };

@@ -4,10 +4,12 @@ export default {
       {
         id: 132456,
         name: "Yamaha YBR 125",
-        position: {
-          lat: 43.6051112,
-          lng: 1.4426178999999593
-        },
+        positions: [
+          {
+            lat: 43.6051112,
+            lng: 1.4426178999999593
+          }
+        ],
         battery: 32,
         alerts: [
           {
@@ -30,10 +32,23 @@ export default {
       {
         id: 1321546,
         name: "Honda Transalp 600",
-        position: {
-          lat: 43.64709329999999,
-          lng: 1.4254163000000517
-        },
+        positions: [
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            lat: 43.64709329999999,
+            lng: 1.4254163000000517
+          },
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            lat: 43.562512,
+            lng: 1.458816
+          },
+          {
+            date: new Date('2018-06-22T03:24:00'),
+            lat: 43.606136,
+            lng: 1.448605
+          },
+        ],
         battery: 76,
         alerts: [
           {
@@ -180,8 +195,9 @@ export default {
       commit('deselectAll')
     },
     selectBike({commit, state}, bike) {
-      console.log('Select bike n. ' + state.bikes.indexOf(bike))
-      commit('selectBike', state.bikes.indexOf(bike))
+      let selectedBikeObject = state.bikes.find(o => o.id === bike.id);
+      console.log('Select bike n. ' + bike.id)
+      commit('selectBike', state.bikes.indexOf(selectedBikeObject))
     },
     selectBikeById({commit, state}, bikeId) {
       console.log('Select bike with ID ' + bikeId)

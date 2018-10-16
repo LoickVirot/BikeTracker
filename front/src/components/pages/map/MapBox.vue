@@ -22,7 +22,7 @@ export default {
     this.id = 'map-' + this._uid
     let self = this;
 
-    let position = this.markers[0].position || [43.604652, 1.444209];
+    let position = this.markers[0].position;
 
     setTimeout(() => {
       // var mymap = L.map(this.id).setView(position, 20);
@@ -38,10 +38,48 @@ export default {
         accessToken: 'pk.eyJ1IjoibHZpcm90IiwiYSI6ImNqa2d1NWE2bDBreHkza21pNDB4eHo1bzYifQ.2MuyL9eFyNCf0xnpadqkMw'
       }).addTo(mymap);
 
+      this.map = mymap;
+
       if (this.markers !== undefined) {
-        this.markers.forEach(marker => {
+        this.showMarkers();
+      }
+    });
+  },
+  watch: {
+    markers: async function(newVal, oldVal) {
+      await this.mapMarkers.map((marker, index) => {
+        this.map.removeLayer(marker.marker)
+        this.map.removeLayer(marker.circle)
+      });
+      this.mapMarkers = [];
+      this.showMarkers();
+      this.map.setZoomAround(this.mapMarkers[0].marker.getLatLng(), 20);
+      this.map.panTo(this.mapMarkers[0].marker.getLatLng())
+    },
+  },
+  methods: {
+    showMarkers() {
+      this.markers.forEach(marker => {
+          let icon = null;
+          if (marker.icon == 'bike') {
+            icon = L.icon({
+              iconUrl: '/image/motorcycle.png',
+              iconSize: [32, 32],
+              iconAnchor: [16, 16],
+              popupAnchor: [0, -16]
+            });
+          } else {
+            icon = L.icon({
+              iconUrl: '/image/pin-red.png',
+              iconSize: [32, 32],
+              iconAnchor: [16, 32],
+              popupAnchor: [0, -32]
+            });
+          }
           let position = marker.position
-          let mapMarker = L.marker(position).addTo(mymap);
+          let mapMarker = L.marker(position, {
+            icon: icon
+          }).addTo(this.map);
           if (self.markerOnClick !== undefined) {
             mapMarker.on('click', function() {
               self.markerOnClick(marker);
@@ -52,28 +90,15 @@ export default {
             fillColor: '#40b883',
             fillOpacity: 0.1,
             radius: 50
-          }).addTo(mymap);
+          }).addTo(this.map);
           mapMarker.bindPopup(marker.name);
           this.mapMarkers.push({
             marker: mapMarker,
             circle: circle,
           });
         });
-      }
-      this.map = mymap;
-    });
-  },
-  watch: {
-    markers: async function(newVal, oldVal) {
-      await newVal.map((marker, index) => {
-        this.mapMarkers[index].marker.setLatLng(marker.position);
-        this.mapMarkers[index].marker.bindPopup(marker.name);
-        this.mapMarkers[index].circle.setLatLng(marker.position);
-      });
-      this.map.setZoomAround(this.mapMarkers[0].marker.getLatLng(), 20);
-      this.map.panTo(this.mapMarkers[0].marker.getLatLng())
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
