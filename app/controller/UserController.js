@@ -20,6 +20,7 @@ module.exports = {
         if (req.params.id === undefined) {
             try {
                 let users = await User.find();
+                users.map(user => user.password = null);
                 res.send(new SuccessResponse(users));
             } catch (err) {
                 res.send(new InternalErrorResponse(err));
@@ -32,6 +33,7 @@ module.exports = {
                 res.send(new BadRequestResponse('User not found'))
                 return next();
             }
+            user.password = null;
             res.send(new SuccessResponse(user));
         } catch (err) {
             res.send(new InternalErrorResponse(err));
