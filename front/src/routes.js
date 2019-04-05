@@ -5,9 +5,9 @@ import LoginView from './components/pages/auth/LoginView.vue';
 import SettingsView from './components/pages/settings/SettingsView.vue';
 
 export default [
-  { path: '/', component: MapView },
-  { path: '/bike/:id', component: BikeView },
-  { path: '/bike/:id/alerts', component: AlertListView },
-  { path: '/settings', component: SettingsView },
-  { path: '/login', component: LoginView },
+  { name: 'home', path: '/', component: MapView },
+  { name: 'bike_index', path: '/bike/:id', component: BikeView },
+  { name: 'bike_alerts_index', path: '/bike/:id/alerts', component: AlertListView },
+  { name: 'settings', path: '/settings', component: SettingsView },
+  { name: 'login', path: '/login', component: LoginView },
 ];

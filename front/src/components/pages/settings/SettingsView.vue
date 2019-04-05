@@ -13,6 +13,7 @@
         <input-form type="text" value="loick.virot@gmail.com" disabled/>
         <input-form type="password" placeholder="New password" />
         <input-form type="password" placeholder="Confirm password" />
+        <a href="#" @click='logout'>Logout from account</a>
       </card-content>
     </card-box>
   </div>
@@ -28,6 +29,12 @@ export default {
     CardContent,
     InputForm,
   },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logout');
+      this.$router.push({name: 'login'})
+    }
+  }
 };
 </script>
 <style>

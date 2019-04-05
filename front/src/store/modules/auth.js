@@ -8,6 +8,9 @@ export default {
   mutations: {
     loginUser(state, accountInfo) {
       state.user.username = accountInfo.username;
+    },
+    logoutUser(state) {
+      state.user.username = null;
     }
   },
   actions: {
@@ -21,6 +24,9 @@ export default {
       commit('loginUser', {
         username: loginParams.username,
       });
+    },
+    logout({commit, state}) {
+      commit('logoutUser', {});
     }
   },
   getters: {},
