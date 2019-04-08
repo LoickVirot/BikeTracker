@@ -2,6 +2,7 @@
     "url": "http://localhost:1337/",
     "routes": {
         "login": "login",
-        "getUser": "user"
+        "getUser": "user",
+        "getTrackers": "tracker"
     }
 }

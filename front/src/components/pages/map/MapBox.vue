@@ -22,13 +22,25 @@ export default {
     this.id = 'map-' + this._uid
     let self = this;
 
-    let position = this.markers[0].position;
+    if (this.markers.length > 0) {
+      let position = this.markers[0].position;
+    } else {
+      let position = [];
+    }
 
     setTimeout(() => {
-      // var mymap = L.map(this.id).setView(position, 20);
-      var mymap = L.map(this.id).fitBounds(this.markers.map(marker => {
-        return marker.position 
-      }));
+      const defaultPosition = [
+        '48.853',
+        '2.35'
+      ];
+
+      if (this.markers.length > 0) { 
+        var mymap = L.map(this.id).fitBounds(this.markers.map(marker => {
+          return marker.position 
+        })); 
+      } else { 
+        var mymap = L.map(this.id).setView(defaultPosition, 6);
+      }
       mymap.setZoom(mymap.getZoom() - 1);
 
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -40,7 +52,7 @@ export default {
 
       this.map = mymap;
 
-      if (this.markers !== undefined) {
+      if (this.markers !== undefined && this.markers.length > 0) {
         this.showMarkers();
       }
     });
@@ -60,43 +72,52 @@ export default {
   methods: {
     showMarkers() {
       this.markers.forEach(marker => {
-          let icon = null;
-          if (marker.icon == 'bike') {
-            icon = L.icon({
-              iconUrl: '/image/motorcycle.png',
-              iconSize: [32, 32],
-              iconAnchor: [16, 16],
-              popupAnchor: [0, -16]
-            });
-          } else {
-            icon = L.icon({
-              iconUrl: '/image/pin-red.png',
-              iconSize: [32, 32],
-              iconAnchor: [16, 32],
-              popupAnchor: [0, -32]
-            });
-          }
-          let position = marker.position
-          let mapMarker = L.marker(position, {
-            icon: icon
-          }).addTo(this.map);
-          if (self.markerOnClick !== undefined) {
-            mapMarker.on('click', function() {
-              self.markerOnClick(marker);
-            });
-          }
-          var circle = L.circle(position, {
-            color: '#40b883',
-            fillColor: '#40b883',
-            fillOpacity: 0.1,
-            radius: 50
-          }).addTo(this.map);
-          mapMarker.bindPopup(marker.name);
-          this.mapMarkers.push({
-            marker: mapMarker,
-            circle: circle,
+        let icon = null;
+        if (marker.icon == 'bike') {
+          icon = L.icon({
+            iconUrl: '/image/motorcycle.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+            popupAnchor: [0, -16]
           });
+        } else {
+          icon = L.icon({
+            iconUrl: '/image/pin-red.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+          });
+        }
+        let position = marker.position
+        let mapMarker = L.marker(position, {
+          icon: icon
+        }).addTo(this.map);
+        if (self.markerOnClick !== undefined) {
+          mapMarker.on('click', function() {
+            self.markerOnClick(marker);
+          });
+        }
+        var circle = L.circle(position, {
+          color: '#40b883',
+          fillColor: '#40b883',
+          fillOpacity: 0.1,
+          radius: 50
+        }).addTo(this.map);
+        mapMarker.bindPopup(marker.name);
+        this.mapMarkers.push({
+          marker: mapMarker,
+          circle: circle,
         });
+      });
+    }
+  },
+  watch: {
+    mapMarkers: function() {
+      const self = this;
+      console.log(self.mapMarkers)
+      this.map.fitBounds(this.mapMarkers.map(marker => {
+        return marker.marker.getLatLng(); 
+      }));
     }
   }
 };

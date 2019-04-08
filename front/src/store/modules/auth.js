@@ -20,17 +20,17 @@ export default {
           username: accountInfo.username,
           password: accountInfo.password
         });
-        const apiToken = res.data.data;
+        const apiToken = res.data.data.token;
+        const userId = res.data.data.userId;
         state.auth.token = apiToken;
         try {
-          const id = '5ca73b2f26423500ccc2090e';
           res = await axios({
-            url: apiConfig.url + apiConfig.routes.getUser + '/' + id, 
+            url: apiConfig.url + apiConfig.routes.getUser + '/' + userId, 
             headers: { 'Authorization': state.auth.token }
           });
           state.user.username = res.data.data.username;
           state.user.email = res.data.data.email;
-          EventBus.$emit(EventsEnum.LOGIN_SUCCESS, res.data)
+          EventBus.$emit(EventsEnum.LOGIN_SUCCESS, res.data);
         } catch (err) {
           throw "User logged succesfully but was not found at search";
         }

@@ -38,7 +38,10 @@ module.exports = {
                 let token = jwt.sign({
                     'username': user.username
                 }, config.jwtSecret, { expiresIn: '1h' });
-                res.send(new SuccessResponse(token));
+                res.send(new SuccessResponse({
+                    token: token,
+                    userId: user.id
+                }));
                 return next();
             } catch (err) {
                 res.send(new InternalErrorResponse('Error while comparing passwords: ' + err))

@@ -1,184 +1,9 @@
+import axios from 'axios';
+import apiConfig from '../../../config/api-config.json'
+
 export default {
   state: {
-    bikes: [
-      {
-        id: 132456,
-        name: "Yamaha YBR 125",
-        positions: [
-          {
-            lat: 43.6051112,
-            lng: 1.4426178999999593
-          }
-        ],
-        battery: 32,
-        alerts: [
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Test',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Test alerte 2',
-            level: 0
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Heeeeyyy',
-            level: 1
-          },
-        ]
-      },
-      {
-        id: 1321546,
-        name: "Honda Transalp 600",
-        positions: [
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            lat: 43.64709329999999,
-            lng: 1.4254163000000517
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            lat: 43.562512,
-            lng: 1.458816
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            lat: 43.606136,
-            lng: 1.448605
-          },
-        ],
-        battery: 76,
-        alerts: [
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Niveau de batterie en dessous de 50%',
-            level: 1
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Secousses sur la moto',
-            level: 1
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          },
-          {
-            date: new Date('2018-06-22T03:24:00'),
-            content: 'Déplacement de la moto hors de la zone de sécurité',
-            level: 2
-          }
-        ]
-      },
-    ],
+    bikes: [],
     selected: null
   },
   mutations: {
@@ -187,24 +12,79 @@ export default {
     },
     selectBike(state, index) {
       state.selected = index;
+    },
+    async getBikes(state, userToken) {
+      try {
+        const res = await axios({
+          url: apiConfig.url + apiConfig.routes.getTrackers,
+          headers: { 'Authorization': userToken }
+        });
+        const bikes = res.data.data;
+        state.bikes = [];
+        bikes.forEach(bike => {
+          const bikeObj = {
+            id: bike._id,
+            name: bike.label,
+            positions: [
+              {
+                date: new Date('2018-06-22T03:24:00'),
+                lat: 43.64709329999999,
+                lng: 1.4254163000000517
+              },
+              {
+                date: new Date('2018-06-22T03:24:00'),
+                lat: 43.562512,
+                lng: 1.458816
+              },
+              {
+                date: new Date('2018-06-22T03:24:00'),
+                lat: 43.606136,
+                lng: 1.448605
+              },
+            ],
+            battery: 35,
+            alerts: [
+              {
+                date: new Date('2018-06-22T03:24:00'),
+                content: 'Test',
+                level: 2
+              },
+              {
+                date: new Date('2018-06-22T03:24:00'),
+                content: 'Test alerte 2',
+                level: 0
+              },
+              {
+                date: new Date('2018-06-22T03:24:00'),
+                content: 'Heeeeyyy',
+                level: 1
+              },
+            ]
+          };
+          state.bikes.push(bikeObj);
+        })
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
     }
   }, 
   actions: {
     deselectAll({ commit }) {
-      console.log('Deselect triggered')
       commit('deselectAll')
     },
     selectBike({commit, state}, bike) {
       let selectedBikeObject = state.bikes.find(o => o.id === bike.id);
-      console.log('Select bike n. ' + bike.id)
       commit('selectBike', state.bikes.indexOf(selectedBikeObject))
     },
     selectBikeById({commit, state}, bikeId) {
-      console.log('Select bike with ID ' + bikeId)
       let bike = state.bikes.filter(bike => {
         return bike.id == bikeId
       })[0];
       commit('selectBike', state.bikes.indexOf(bike));
+    },
+    getBikes({commit, state}, user) {
+      commit('getBikes', user.auth.token)
     }
   },
   getters: {

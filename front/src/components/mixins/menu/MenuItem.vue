@@ -6,7 +6,7 @@
       </div>
     </router-link>
     <div class="childs" v-if="showChilds">
-      <div class="child" v-for="child in childs" :key="child.id">
+      <div class="child" v-for="child in validatedChilds" :key="child.id">
         <menu-item-child :title="child.name" :url="child.url"></menu-item-child>
       </div>
     </div>
@@ -27,9 +27,21 @@ export default {
   components: {
     MenuItemChild
   },
+  mounted() {
+    if (this.childs) {
+      this.childs.forEach(child => {
+        this.validatedChilds.push({
+          id: child.id,
+          name: child.name,
+          url: child.url
+        });
+      });
+    }
+  },
   data() {
     return {
       showChilds: false,
+      validatedChilds: []
     }
   },
 };

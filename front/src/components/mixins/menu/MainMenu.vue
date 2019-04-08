@@ -14,6 +14,8 @@
 /* eslint linebreak-style: ["error", "windows"] */
 import { mapState, mapGetters } from 'vuex';
 import MenuItem from './MenuItem.vue';
+import EventBus from '../../../services/EventBus';
+import EventsEnum from '../../../enum/EventsEnum';
 
 export default {
   name: 'mainMenu',
@@ -25,20 +27,26 @@ export default {
   },
   beforeMount() {
     this.bikes.map(bike => {
+      console.log(bike)
       bike.url = '/bike/' + bike.id;
     })
   },
   mounted() {
+    // Get trackers
+    EventBus.$on(EventsEnum.LOGIN_SUCCESS, event => {
+      this.$store.dispatch('getBikes', this.user)
+    })
   },
   computed: {
     ...mapState({
-      bikes: state => state.bike.bikes
+      bikes: state => state.bike.bikes,
+      user: state => state.auth
     }),
 
     ...mapGetters([
       'selectedBike'
     ]),
-  }
+  },
 };
 
 </script>
