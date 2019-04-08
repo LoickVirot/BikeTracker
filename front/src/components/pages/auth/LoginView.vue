@@ -4,6 +4,9 @@
     <card-box class="login-card">
       <card-content>
         <h1>Connexion</h1>
+        <error-box type="danger" v-show="errorMessage !== ''">
+          {{ errorMessage }}
+        </error-box>
         <div class="form-group">
           <input-form type="text" id="login-username" placeholder="Nom d'utilisateur" v-model="username"/>
         </div>
@@ -24,6 +27,10 @@ import CardBox from '../../mixins/card/CardBox.vue';
 import CardContent from '../../mixins/card/CardContent.vue';
 import InputForm from '../../mixins/form/InputForm.vue';
 import ButtonItem from '../../mixins/form/ButtonItem.vue';
+import ErrorBox from '../../mixins/error/ErrorBox.vue';
+
+import EventBus from '../../../services/EventBus'
+import EventsEnum from '../../../enum/EventsEnum';
 
 export default {
   components: {
@@ -31,11 +38,13 @@ export default {
     CardContent,
     InputForm,
     ButtonItem,
+    ErrorBox
   },
   data() {
     return {
       username: '',
       password: '',
+      errorMessage: '',
     };
   },
   methods: {
@@ -44,11 +53,22 @@ export default {
         username: this.username, 
         password: this.password
       });
-      if (result == undefined) {
-        this.$router.push('/')
-      }
     },
   },
+  created() {
+    EventBus.$on(EventsEnum.LOGIN_SUCCESS, event => {
+      this.$router.push('/');
+    });
+    EventBus.$on(EventsEnum.LOGIN_INCORRECT_USERNAME, event => {
+      this.errorMessage = 'Please fill your username';
+    })
+    EventBus.$on(EventsEnum.LOGIN_INCORRECT_PASSWORD, event => {
+      this.errorMessage = 'Please fill your password';
+    })
+    EventBus.$on(EventsEnum.LOGIN_INCORRECT, event => {
+      this.errorMessage = 'Invalid login';
+    })    
+  }
 };
 </script>
 <style>

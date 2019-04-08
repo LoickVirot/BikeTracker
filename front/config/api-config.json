@@ -1,0 +1,7 @@
+{
+    "url": "http://localhost:1337/",
+    "routes": {
+        "login": "login",
+        "getUser": "user"
+    }
+}

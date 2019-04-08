@@ -1,11 +1,23 @@
-var restify = require('restify');
-var appConfig = require('./config/app.json');
-var mongoose = require('mongoose');
+const restify = require('restify');
+const appConfig = require('./config/app.json');
+const mongoose = require('mongoose');
+const corsMiddleware = require('restify-cors-middleware');
 
 // Initialize server
-var server = restify.createServer({
+const server = restify.createServer({
     name: appConfig.appName
 });
+
+
+const cors = corsMiddleware({
+  preflightMaxAge: 5, //Optional
+  origins: [appConfig.frontEndUrl],
+  allowHeaders: ['API-Token', 'Authorization'],
+  exposeHeaders: ['API-Token-Expiry']
+})
+
+server.pre(cors.preflight)
+server.use(cors.actual)
 
 server.pre(restify.pre.sanitizePath());
 

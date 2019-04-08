@@ -1,6 +1,6 @@
 <template>
   <div class="mainStructure">
-    <main-menu v-show="user.username !== null"></main-menu>
+    <main-menu v-show="user.auth.token !== null"></main-menu>
     <div class="main-structure">
       <router-view></router-view>
     </div>
@@ -18,9 +18,12 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.auth.user,
+      user: state => state.auth,
     }),
   },
+  mounted() {
+    console.log(this.user);
+  }
 };
 
 </script>

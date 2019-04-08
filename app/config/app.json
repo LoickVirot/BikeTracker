@@ -1,5 +1,6 @@
 {
     "appName": "TrackerJS",
     "port": 8080,
-    "jwtSecret": "secreeet"
+    "jwtSecret": "secreeet",
+    "frontEndUrl": "http://localhost:8080"
 }
