@@ -9,8 +9,8 @@
     <card-box>
       <card-content>
         <h2>Mon compte</h2>
-        <input-form type="text" value="lvirot" disabled/>
-        <input-form type="text" value="loick.virot@gmail.com" disabled/>
+        <input-form type="text" :value="user.user.username" disabled/>
+        <input-form type="text" :value="user.user.email" disabled/>
         <input-form type="password" placeholder="New password" />
         <input-form type="password" placeholder="Confirm password" />
         <a href="#" @click='logout'>Logout from account</a>
@@ -22,6 +22,7 @@
 import CardBox from '../../mixins/card/CardBox.vue';
 import CardContent from '../../mixins/card/CardContent.vue';
 import InputForm from '../../mixins/form/InputForm.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -34,7 +35,12 @@ export default {
       await this.$store.dispatch('logout');
       this.$router.push({name: 'login'})
     }
-  }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.auth,
+    }),
+  },
 };
 </script>
 <style>
