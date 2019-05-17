@@ -14,7 +14,20 @@ var trackerSchema = mongoose.Schema({
     label: {
         type: String,
         required: true
-    }
+    },
+    charge: {
+        type: Number, 
+        required: true
+    },
+    positions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Position',
+            sort: 1
+        }
+    ]
+}, {
+    versionKey: false,
 });
 
 // Validation
@@ -23,4 +36,4 @@ trackerSchema.path('trackerId').validate((trackerId) => {
     return trackerId.length <= 8;
 });
 
-module.exports = mongoose.model('Tracker', trackerSchema);
+module.exports = mongoose.model('Tracker', trackerSchema)

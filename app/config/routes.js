@@ -3,6 +3,7 @@ var UserController = require('../controller/UserController');
 var AuthController = require('../controller/AuthController');
 var TrackerController = require('../controller/TrackerController');
 let TestHookController = require('../controller/TestHookController');
+let PositionController = require('../controller/PositionController');
 
 var AuthMiddleware = require('../middlewares/AuthMiddleware');
 
@@ -25,6 +26,10 @@ module.exports = {
         server.get('/tracker/:id', AuthMiddleware, TrackerController.get);
         server.del('/tracker/:id', AuthMiddleware, TrackerController.delete);
         server.put('/tracker/:id', AuthMiddleware, TrackerController.put);
+
+        // Positions
+        server.post('/position', AuthMiddleware, PositionController.post);
+        //server.get('/position/:id', AuthMiddleware, PositionController.get);
 
         // Auth
         server.post('/login', AuthController.login);

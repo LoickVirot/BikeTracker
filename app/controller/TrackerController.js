@@ -1,16 +1,20 @@
 let Tracker = require('../model/Tracker');
+let Position = require('../model/Position');
 let InternalErrorResponse = require('../core/responses/InternalErrorResponse');
 let BadRequestResponse = require('../core/responses/BadRequestResponse');
 let SuccessResponse = require('../core/responses/SuccessResponse');
+
+const MAX_POSITION_TO_DELIVER = 5;
 
 module.exports = {
 
     list: async (req, res, next) => {
         try {
-            let trackers = await Tracker.find({});
+            let trackers = await Tracker.find({}).populate('owner');
             res.send(new SuccessResponse(trackers));
             return next();
         } catch (err) {
+            console.log(err)
             return next(new InternalErrorResponse('Error while getting trackers'));
         }
     },
@@ -18,10 +22,20 @@ module.exports = {
     get: async (req, res, next) => {
         trackerId = req.params.id;
         try {
-            let tracker = await Tracker.findOne({_id: trackerId});
+            let tracker = await Tracker.findOne({_id: trackerId})
+                .populate('owner')
+                .populate({
+                    path: 'positions',
+                    options: {
+                        limit: MAX_POSITION_TO_DELIVER,
+                        sort: { 'time': -1 }
+                    }
+                })
+                .exec();
             res.send(new SuccessResponse(tracker));
             return next();
         } catch (err) {
+            console.log(err)
             return next(new InternalErrorResponse('Error while getting trackers'));
         }
     },
@@ -45,6 +59,9 @@ module.exports = {
         let body = req.body;
         try {
             let tracker = await Tracker.findOne({_id: id});
+            if (!tracker) {
+                return next(new BadRequestResponse(`Tracker with id ${id} does not exists`));
+            }
             if (body.label !== tracker.label) {
                 tracker.label = body.label; 
             }

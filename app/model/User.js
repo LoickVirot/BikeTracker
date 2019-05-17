@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt');
+const Schema = mongoose.Schema
 
-var userSchema = mongoose.Schema({
+var userSchema = new Schema({
     username: {
         type: String,
         unique: true,
@@ -9,12 +10,15 @@ var userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false 
     },
     email: {
         type: String,
         required: true,
     }
+}, {
+    versionKey: false
 })
 
 // Validation

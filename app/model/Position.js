@@ -12,11 +12,12 @@ var positionSchema = mongoose.Schema({
     tracker: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tracker',
-        required: true
+        required: true,
+        select: false
     },
     time: {
         type: Date,
-        required: true
+        required: true,
     }
 })
 
